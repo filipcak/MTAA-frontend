@@ -24,6 +24,14 @@ export const styles = StyleSheet.create({
       fontSize: 35,
       marginTop: 10
     },
+
+    textStyleSugar: {      
+      alignSelf: "center",
+      fontFamily: "Roboto",
+      color: "#121212",
+      fontSize: 25,
+      marginTop: 10
+    },
     
     inputView: {
       backgroundColor: "#00BFFF",
@@ -41,11 +49,13 @@ export const styles = StyleSheet.create({
       marginLeft: 20,
     },
     textStyle: {
-        textAlign: 'left',
+        left: "10%",
+        right: "10%",
+        textAlign: 'auto',
         fontFamily: "Roboto",
         color: "#121212",
-        left: "10%",
-        marginTop: 20,
+        marginTop: 60,
+        paddingRight: 20
       },
     btnStyle: {
         alignSelf: 'center',
