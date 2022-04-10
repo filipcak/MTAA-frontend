@@ -39,7 +39,7 @@ class LoginDoctorScreen extends React.Component{
 
   async myFunction() {
       try{
-          const response = await fetch('https://mtaa-backend-pscpu.ondigitalocean.app/login_doctor', {
+          await fetch('https://mtaa-backend-pscpu.ondigitalocean.app/login_doctor', {
           method: 'POST',
           headers: { "Content-Type": "application/json"},
           body: JSON.stringify({doctor_login_data: {id_number: this.r_number, password: this.passwrd}})

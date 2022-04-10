@@ -13,6 +13,7 @@ import PatientSugarCalcScreen from './screens/PatientSugarCalcScreen'
 import PatientResultScreen from './screens/PatientResultScreen'
 import HomeDoctorScreen from "./screens/HomeDoctorScreen";
 import AddPatient from './screens/AddPatient';
+import DetailPatient from './screens/DetailPatient';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,11 @@ export default class App extends React.Component {
               name="AddPatient"
               component={AddPatient}
               options={{ title: 'Pridanie pacienta'}}
+          />
+          <Stack.Screen
+              name="DetailPatient"
+              component={DetailPatient}
+              options={{ title: 'Informácie o pacientovi'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
