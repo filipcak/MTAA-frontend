@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -23,7 +24,7 @@ class RegisterPatientScreen extends React.Component{
 
   render(){
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.textStyle}>Meno</Text>
         <TextInput style={styles.btnStyle} onChangeText={(name) => setName(name)}/>
   
@@ -45,7 +46,7 @@ class RegisterPatientScreen extends React.Component{
         <TouchableOpacity style={styles.btnStyleRegLog}>
           <Text>Registrovať</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }

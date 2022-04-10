@@ -23,15 +23,18 @@ class LoginDoctorScreen extends React.Component{
     };
   }
   id_doctor = 0
+  passwrd = ''
+  r_number = ''
 
   showId() {
     console.log(this.id_doctor);
   }
   newFunction(id){
-    alert("podarilo sa");
+    //alert("podarilo sa");
+    this.props.navigation.navigate('HomeDoctorScreen', {id: id, r_number: this.r_number, password: this.passwrd})
   }
   nepodarilosa(){
-    alert("nepodarilo prihlasit");
+    alert("Nepodarilo prihlásiť");
   }
 
   async myFunction() {
@@ -39,12 +42,13 @@ class LoginDoctorScreen extends React.Component{
           const response = await fetch('https://mtaa-backend-pscpu.ondigitalocean.app/login_doctor', {
           method: 'POST',
           headers: { "Content-Type": "application/json"},
-          body: JSON.stringify({doctor_login_data: {id_number: "123456/0000", password: "1234"}})
+          body: JSON.stringify({doctor_login_data: {id_number: this.r_number, password: this.passwrd}})
           }).then(response => response.json()).then(data => {
             this.newFunction(data.response.id_doctor);
           })
       } catch (error){
-        this.nepodarilosa()
+          //console.log(error);
+          this.nepodarilosa()
       } 
   }
 
@@ -55,20 +59,20 @@ class LoginDoctorScreen extends React.Component{
         <TextInput
           style={styles.btnStyle}
           placeholder="XXXXXX/XXXX"
-          //onChangeText={(email) => setIdNumber(email)}
+          onChangeText={(birth_number) =>  this.r_number = birth_number}
         />
-  
-        <Text style={styles.textStyle}>{this.id_doctor}</Text>
+
+        <Text style={styles.textStyle}>Heslo</Text>
         <TextInput
           style={styles.btnStyle}
           secureTextEntry={true}
-          //onChangeText={(password) => setPassword(password)}
+          onChangeText={(password) =>   this.passwrd = password}
         />
    
         <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-    this.myFunction();
-  }}>
-          <Text>Prihlas sa</Text>
+            this.myFunction();
+        }}>
+          <Text>Prihlás sa</Text>
         </TouchableOpacity>
       </View>
     );
