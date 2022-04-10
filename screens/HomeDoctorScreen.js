@@ -31,7 +31,7 @@ class HomeDoctorScreen extends React.Component{
     }
 
     detailPatient(id_doctor, r_doctor, p_doctor){
-        this.props.navigation.navigate('DetailPatient', {id: id_doctor, r_number: r_doctor, password: p_doctor})
+        this.props.navigation.navigate('DetailPatient', {id: id_doctor, r_number: r_doctor, password: p_doctor, id_p: 1})
     }
 
     async getPatients(id_doctor, r_doctor, p_doctor) {

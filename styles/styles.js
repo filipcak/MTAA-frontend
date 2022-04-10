@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
- 
+
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -87,4 +87,27 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         backgroundColor: "#00BFFF",
     },
+    dataView: {
+        top: "20%",
+        left: "10%",
+        right: "10%",
+        //textAlign: 'center',
+        padding: 24,
+        position: 'absolute',
+        fontFamily: "Roboto",
+        color: "#121212",
+        backgroundColor: "#a1f0fe",
+        borderRadius: 12,
+    },
+    // working
+    btnStyleleft: {
+        alignSelf: 'center',
+        width: "80%",
+        borderRadius: 15,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 30,
+        backgroundColor: "#00BFFF",
+    }
 });
