@@ -109,5 +109,14 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 30,
         backgroundColor: "#00BFFF",
+    },
+    textStyles: {
+        left: "10%",
+        right: "10%",
+        textAlign: 'auto',
+        fontFamily: "Roboto",
+        color: "#121212",
+        marginTop: 10,
+        paddingRight: 10
     }
 });

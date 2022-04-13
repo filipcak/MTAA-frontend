@@ -30,8 +30,8 @@ class HomeDoctorScreen extends React.Component{
         this.props.navigation.navigate('AddPatient',{id: id_doctor, r_number: r_doctor, password: p_doctor})
     }
 
-    detailPatient(id_doctor, r_doctor, p_doctor){
-        this.props.navigation.navigate('DetailPatient', {id: id_doctor, r_number: r_doctor, password: p_doctor, id_p: 1})
+    detailPatient(id_doctor, r_doctor, p_doctor, id_patient){
+        this.props.navigation.navigate('DetailPatient', {id: id_doctor, r_number: r_doctor, password: p_doctor, id_p: id_patient})
     }
 
     async getPatients(id_doctor, r_doctor, p_doctor) {
@@ -51,27 +51,36 @@ class HomeDoctorScreen extends React.Component{
         }
     }
 
+    // render table with pacients
+    renderTable(arr, d_id, d_rn, d_p) {
+        return arr.map(({ id_number, id_patient }) => {
+            return (
+                <View>
+                    <TouchableOpacity onPress = {() => {
+                        this.detailPatient(d_id, d_rn, d_p, id_patient);
+                    }}>
+                        <Text key={id_patient}>{id_number} </Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    }
 
     render(){
         const {id, r_number, password} = this.props.route.params;
         this.getPatients(id, r_number, password);
         return (
-            <View style={styles.container}>
-                <Text style={styles.textStyle}>Zoznam tvojich pacientov</Text>
-                    <FlatList style={styles.textStyleInfo}
-                              data={this.state.data}
-                              keyExtractor={(item, index) => index.toString()}
-                              renderItem={({item}) => <Text>{item.id_number}</Text>}
-                        />
+            <View style={styles.dataView}>
+                <Text style={styles.textStyles}>Zoznam tvojich pacientov</Text>
+                <Text style={styles.textStyles}>Rodné číslo</Text>
+                <View style={styles.textStyles}>
+                    {this.renderTable(this.state.data, id, r_number, password)}
+                </View>
+
                 <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
                     this.addPatient(id, r_number, password);
                 }}>
                     <Text>Pridaj pacienta</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-                    this.detailPatient(id, r_number, password);
-                }}>
-                    <Text>Detail Pacienta</Text>
                 </TouchableOpacity>
             </View>
         );

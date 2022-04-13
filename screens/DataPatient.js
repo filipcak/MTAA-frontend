@@ -17,14 +17,19 @@ class DataPatient extends React.Component{
     constructor(props) {
         super(props);
     }
+    indevelopment(){
+        Alert.alert("in development", "pracuje sa na tom");
+    }
+
     render(){
+        const {id, r_number, password, id_p} = this.props.route.params;
         return (
             <View style={styles.dataView} >
                 <Text key="mail">IN DEVELOPMENT</Text>
                 <TouchableOpacity style={styles.btnStyleleft} onPress = {() => {
-                    //in development
+                    this.indevelopment();
                 }}>
-                    <Text>Zavolaj pacientovi</Text>
+                    <Text>in development</Text>
                 </TouchableOpacity>
             </View>
         );

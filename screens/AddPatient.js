@@ -46,7 +46,15 @@ class AddPatient extends React.Component{
                     'Authorization': 'Basic '+btoa(`${r_doctor}:${p_doctor}`),
                 }),
                 body: JSON.stringify({assign_info: {id_doctor: id_doctor, id_patient: this.id_patient}})
-                }).then(response => this.Messages(response.status));
+                }).then(response => {
+                    if (response.status === 200) {
+                        Alert.alert("Úspech", "Pacient s rodným číslom: " + this.rc_patient + " je úspešne priradený.")
+                        this.backHomeScreen(id_doctor, r_doctor, p_doctor);
+                    }
+                    else {
+                        this.Messages(response.status);
+                    }
+                });
             }
             catch (error){
                 console.error(error);
@@ -58,10 +66,14 @@ class AddPatient extends React.Component{
         }
     }
 
+    backHomeScreen(id_doctor, r_doctor, p_doctor){
+        this.props.navigation.navigate('HomeDoctorScreen', {id: id_doctor, r_number: r_doctor, password: p_doctor})
+    }
+
     render(){
         const {id, r_number, password} = this.props.route.params;
         return (
-            <View style={styles.container}>
+            <View style={styles.dataView}>
                 <Text style={styles.textStyle}>Napíš rodné číslo pacienta</Text>
                 <TextInput
                     style={styles.btnStyle}
