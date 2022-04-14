@@ -21,6 +21,23 @@ class PatientResultScreen extends React.Component{
 
       }
 
+    returnHome(){
+        
+        if (this.props.route.params.tag == 0){
+            this.props.navigation.goBack();
+            this.props.navigation.goBack();
+        }
+            
+        else if (this.props.route.params.tag == 1){
+            this.props.navigation.goBack();
+            this.props.navigation.goBack();
+            this.props.navigation.goBack();
+        }
+            
+
+        
+    }
+
     render(){
         return (
             <View style={styles.container}>
@@ -41,6 +58,12 @@ class PatientResultScreen extends React.Component{
                         {this.props.route.params.body}
                     </Text>
                 </View>
+
+                <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+                    this.returnHome();
+                }}>
+                    <Text>Späť</Text>
+                </TouchableOpacity>
                 
             </View>
         );

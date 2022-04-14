@@ -19,32 +19,27 @@ class LoginPatientScreen extends React.Component{
     super(props);
 
     this.state = {
-      id_patient: 0
+      id_number: "",
+      password: ""
     };
   }
-  id_patient = 5
 
-  showId() {
-    console.log(this.id_patient);
-  }
-  newFunction(id){
-    this.props.navigation.navigate('HomePatientScreen', {id_patient: id})
-  }
-  nepodarilosa(){
-    alert("nepodarilo prihlasit");
+  navigateToHome(id){
+    this.props.navigation.navigate('HomePatientScreen', {id_patient: id, r_number: this.state.id_number,
+      password: this.state.password})
   }
 
-  async myFunction() {
+  async signInPatient() {
       try{
           const response = await fetch('https://mtaa-backend-pscpu.ondigitalocean.app/login_patient', {
           method: 'POST',
           headers: { "Content-Type": "application/json"},
-          body: JSON.stringify({patient_login_data: {id_number: "123457/0123", password: "1234"}})
+          body: JSON.stringify({patient_login_data: {id_number: this.state.id_number, password: this.state.password}})
           }).then(response => response.json()).then(data => {
-            this.newFunction(data.response.id_patient);
+            this.navigateToHome(data.response.id_patient);
           })
       } catch (error){
-        this.nepodarilosa()
+        alert("Nepodarilo sa prihlásiť");
       } 
   }
 
@@ -55,18 +50,18 @@ class LoginPatientScreen extends React.Component{
         <TextInput
           style={styles.btnStyle}
           placeholder="XXXXXX/XXXX"
-          //onChangeText={(email) => setIdNumber(email)}
+          onChangeText={(text) => {this.setState({id_number: text})}}
         />
   
-        <Text style={styles.textStyle}>{this.id_patient}</Text>
+        <Text style={styles.textStyle}>Heslo</Text>
         <TextInput
           style={styles.btnStyle}
           secureTextEntry={true}
-          //onChangeText={(password) => setPassword(password)}
+          onChangeText={(text) => {this.setState({password: text})}}
         />
    
         <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-    this.myFunction();
+    this.signInPatient();
   }}>
           <Text>Prihlas sa</Text>
         </TouchableOpacity>

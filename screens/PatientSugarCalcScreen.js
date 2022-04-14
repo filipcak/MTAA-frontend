@@ -18,11 +18,12 @@ import { styles } from '../styles/styles'
 class PatientSugarCalcScreen extends React.Component{
     constructor(props) {
         super(props);
-
+        this.cabohydrates = this.props.route.params.cabohydrates
+        this.tag = this.props.route.params.tag
       }
 
+      
     sugar = ""
-    cabohydrates = "0";
 
     async getInfoRequest(){
         try{
@@ -39,7 +40,7 @@ class PatientSugarCalcScreen extends React.Component{
     }
 
     getInfoResponseProcessing(data){
-        this.props.navigation.navigate('PatientResultScreen', {insulin_dose: data.insulin_dose, body: data.body})
+        this.props.navigation.navigate('PatientResultScreen', {insulin_dose: data.insulin_dose, body: data.body, tag: this.tag})
     }
 
 

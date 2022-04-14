@@ -11,6 +11,9 @@ import RegisterPatientScreen from './screens/RegisterPatientScreen'
 import HomePatientScreen from './screens/HomePatientScreen'
 import PatientSugarCalcScreen from './screens/PatientSugarCalcScreen'
 import PatientResultScreen from './screens/PatientResultScreen'
+import PatientCarbohydratesScreen from './screens/PatientCarbohydratesScreen'
+import PatientSendSugarScreen from './screens/PatientSendSugarScreen'
+
 import HomeDoctorScreen from "./screens/HomeDoctorScreen";
 import AddPatient from './screens/AddPatient';
 import DetailPatient from './screens/DetailPatient';
@@ -31,12 +34,12 @@ export default class App extends React.Component {
           <Stack.Screen
             name="LoginPatientScreen"
             component={LoginPatientScreen}
-            options={{ title: 'LoginPatientScreen' }}
+            options={{ title: 'Prihlásenie pacienta' }}
           />
           <Stack.Screen
             name="LoginDoctorScreen"
             component={LoginDoctorScreen}
-            options={{ title: 'Prihlásenie lekára' }}
+            options={{ title: 'Prihlásenie doktora' }}
           />
           <Stack.Screen
             name="RegisterPatientScreen"
@@ -57,6 +60,16 @@ export default class App extends React.Component {
             name="PatientResultScreen"
             component={PatientResultScreen}
             options={{ title: 'Zadanie cukru'}}
+          />
+          <Stack.Screen
+            name="PatientCarbohydratesScreen"
+            component={PatientCarbohydratesScreen}
+            options={{ title: 'Zadanie karborydrátov'}}
+          />
+          <Stack.Screen
+            name="PatientSendSugarScreen"
+            component={PatientSendSugarScreen}
+            options={{ title: 'Zaznamenanie hodnoty cukru'}}
           />
           <Stack.Screen
               name="HomeDoctorScreen"

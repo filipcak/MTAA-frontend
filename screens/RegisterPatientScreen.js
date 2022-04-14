@@ -8,45 +8,100 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
 
 import { styles } from '../styles/styles'
 
 class RegisterPatientScreen extends React.Component{
-  
-  // const [name, setName] = useState("");
-  // const [surname, setSurname] = useState("");
-  // const [idNumber, setIdNumber] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordSecond, setPasswordSecond] = useState("");
+
+  state = {
+    name: "",
+    surname: "",
+    idNumber: "",
+    email: "",
+    password: "",
+    passwordSecond: "",
+  }
+
+  Messages(message){
+    alert(message)
+    if (message === 201){
+      alert("Boli ste uspesne zaregistrovany")
+    }
+    else if (message === 409){
+        alert("Konflikt")
+    }
+    else{
+        alert("Nepovoleny pristup")
+    }
+}
+
+  checkValues(){
+    if (this.state.password == this.state.passwordSecond){
+      if (this.state.password == "" || this.state.passwordSecond == ""){
+        alert("Je potrebne zadat heslo");
+      }else{
+        this.registerPatient();
+      }
+    }else{
+      alert("Hesla sa nezhoduju");
+    }
+  }
+
+  saveIdPatient(id){
+    this.props.navigation.replace('HomePatientScreen', {id_patient: id, id_number: this.state.idNumber,
+    password: this.state.password})
+  }
+
+  async registerPatient() {
+    try{
+        const response = await fetch('https://mtaa-backend-pscpu.ondigitalocean.app/reg_patient', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({
+          patient_data: {
+            name: this.state.name,
+            surname: this.state.surname,
+            id_number: this.state.idNumber,
+            email: this.state.email,
+            password: this.state.password
+          }
+        })
+        }).then(response => response.json()).then(data => {
+          this.saveIdPatient(data.response.id_patient);
+        })
+    } catch (error){
+      alert("Rodne cislo je pouzite")
+    } 
+}
 
   render(){
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.textStyle}>Meno</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(name) => setName(name)}/>
+        <TextInput style={styles.btnStyle} onChangeText={(text) => {this.setState({name: text})}}/>
   
         <Text style={styles.textStyle}>Priezvisko</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(surname) => setSurname(surname)}/>
+        <TextInput style={styles.btnStyle} onChangeText={(text) => {this.setState({surname: text})}}/>
       
         <Text style={styles.textStyle}>Rodné číslo</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(idNumber) => setIdNumber(idNumber)}/>
+        <TextInput style={styles.btnStyle} placeholder="XXXXXX/XXXX" onChangeText={(text) => {this.setState({idNumber: text})}}/>
   
         <Text style={styles.textStyle}>Email</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(email) => setEmail(email)}/>
+        <TextInput style={styles.btnStyle} onChangeText={(text) => {this.setState({email: text})}}/>
   
         <Text style={styles.textStyle}>Heslo</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(password) => setPassword(password)}/>
+        <TextInput style={styles.btnStyle} onChangeText={(text) => {this.setState({password: text})}}/>
   
         <Text style={styles.textStyle}>Heslo znova</Text>
-        <TextInput style={styles.btnStyle} onChangeText={(passwordSecond) => setPasswordSecond(passwordSecond)}/>
+        <TextInput style={styles.btnStyle} onChangeText={(text) => {this.setState({passwordSecond: text})}}/>
   
-        <TouchableOpacity style={styles.btnStyleRegLog}>
-          <Text>Registrovať</Text>
+        <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+                    this.checkValues();
+                }}>
+          <Text>Registrovať</Text >
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     );
   }
 }
