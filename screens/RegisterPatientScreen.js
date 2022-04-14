@@ -49,7 +49,7 @@ class RegisterPatientScreen extends React.Component{
   }
 
   saveIdPatient(id){
-    this.props.navigation.replace('HomePatientScreen', {id_patient: id, id_number: this.state.idNumber,
+    this.props.navigation.replace('HomePatientScreen', {id_patient: id, r_number: this.state.idNumber,
     password: this.state.password})
   }
 

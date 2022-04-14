@@ -89,7 +89,8 @@ class LoginPatientScreen extends React.Component{
           <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSugarCalcScreen', {cabohydrates: 0, tag: 0})}>
             <Text>Vypočítaj inzulín</Text> 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen')}>
+          <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen', {id_patient: this.props.route.params.id_patient, 
+          r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
             <Text>Zapíš hodnotu cukru</Text>
           </TouchableOpacity> 
       </View>

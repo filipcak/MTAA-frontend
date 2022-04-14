@@ -65,15 +65,16 @@ class PatientSendSugar extends React.Component{
 
     async getSugarRecord(){
         try{
+            const {id_patient, r_number, password} = this.props.route.params;
             const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/get_hist_item`, {
             method: 'PUT',
             headers: new Headers({ 
                 "Content-Type": "application/json",
-                'Authorization': 'Basic '+btoa(`${"123457/0123"}:${1234}`),          
+                'Authorization': 'Basic '+btoa(`${r_number}:${password}`),          
             }),
             body: JSON.stringify({
                     "hist_request": {
-                        "patient_id": 1,
+                        "patient_id": id_patient,
                         "date": this.date
                     }
                 }
@@ -88,15 +89,16 @@ class PatientSendSugar extends React.Component{
 
     async sendSugarRecord(){
         try{
+            const {id_patient, r_number, password} = this.props.route.params;
             const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/change_hist_rec`, {
             method: 'PUT',
             headers: new Headers({ 
                 "Content-Type": "application/json",
-                'Authorization': 'Basic '+btoa(`${"123457/0123"}:${1234}`),          
+                'Authorization': 'Basic '+btoa(`${r_number}:${password}`),          
             }),
             body: JSON.stringify({
                 hist_record: {
-                  patient_id: 1,
+                  patient_id: id_patient,
                   id_hist_request: this.hist_record.id_hist_request,
                   morning: this.hist_record.morning,
                   lunch: this.hist_record.lunch,
