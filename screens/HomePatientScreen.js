@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LogBox } from 'react-native';
 import moment from 'moment';
 import { useIsFocused } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {decode as atob, encode as btoa} from 'base-64'
 
 import {
