@@ -67,6 +67,16 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: "#FFF",
     },
+    btnCall: {
+      alignSelf: 'center',
+        width: "40%",
+        borderRadius: 15,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 30,
+        backgroundColor: "#00FF00",
+    },
     btnHome: {
         alignSelf: 'center',
         width: "80%",

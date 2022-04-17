@@ -125,6 +125,16 @@ class LoginPatientScreen extends React.Component{
             r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
             <Text>Zapíš hodnotu cukru</Text>
           </TouchableOpacity> 
+
+          <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
+            <Text></Text>
+            <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
+              <Text>Zavolaj doktorovi</Text>
+            </TouchableOpacity> 
+          </View>
+          
+
+          
         </View>
         
       </View>

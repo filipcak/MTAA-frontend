@@ -83,6 +83,13 @@ class HomeDoctorScreen extends React.Component{
                 }}>
                     <Text>Pridaj pacienta</Text>
                 </TouchableOpacity>
+
+                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
+                    <Text></Text>
+                    <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
+                        <Text>Spoj sa s pacientom</Text>
+                    </TouchableOpacity> 
+                </View>
             </View>
         );
     }

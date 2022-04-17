@@ -18,6 +18,9 @@ import HomeDoctorScreen from "./screens/HomeDoctorScreen";
 import AddPatient from './screens/AddPatient';
 import DetailPatient from './screens/DetailPatient';
 import DataPatient from './screens/DataPatient';
+import RoomScreen from './screens/RoomScreen';
+import CallScreen from './screens/CallScreen';
+import JoinScreen from './screens/JoinScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +93,21 @@ export default class App extends React.Component {
               name="DataPatient"
               component={DataPatient}
               options={{ title: 'Pacientové dáta'}}
+          />
+          <Stack.Screen
+              name="RoomScreen"
+              component={RoomScreen}
+              options={{ title: 'Room'}}
+          />
+          <Stack.Screen
+              name="CallScreen"
+              component={CallScreen}
+              options={{ title: 'Call'}}
+          />
+          <Stack.Screen
+              name="JoinScreen"
+              component={JoinScreen}
+              options={{ title: 'Join'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "403234234237",
+    "project_id": "mtaa-final",
+    "storage_bucket": "mtaa-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403234234237:android:0ed07bc5d8d78adeb33614",
+        "android_client_info": {
+          "package_name": "com.cli_pok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403234234237-2hldln3le3ui1cpkua3dcmtrrmmkutvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKEutPeZ-E6O4FR52L_oa3Ai02jYPwiGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403234234237-2hldln3le3ui1cpkua3dcmtrrmmkutvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
