@@ -50,6 +50,10 @@ class PatientSugarCalcScreen extends React.Component{
             alert("Nie je cislo");
         }else{
             if (this.sugar >= 0 && this.sugar <= 30){
+                if (this.sugar + this.cabohydrates/5 > 30){
+                    this.cabohydrates = 0
+                    this.sugar = 30
+                }
                 this.getInfoRequest();
             }
             else{

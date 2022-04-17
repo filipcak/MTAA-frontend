@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {decode as atob, encode as btoa} from 'base-64'
+import blankImage from '../images/emptyProfile.png'
 
 import {
   StyleSheet,
@@ -28,7 +29,8 @@ class LoginPatientScreen extends React.Component{
 
       id_patient: "",
       id_number: "",
-      password: ""
+      password: "",    
+      image: Image.resolveAssetSource(blankImage).uri
     }
   }
 
@@ -37,8 +39,38 @@ class LoginPatientScreen extends React.Component{
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.checkIfDataActual();
+      this.getPhoto();
     });
   }
+
+  processResponse(imageBlob, status){
+    if (status == 200){
+      let fileReaderInstance = new FileReader();
+      fileReaderInstance.readAsDataURL(imageBlob); 
+      fileReaderInstance.onload = () => {
+      let base64data = fileReaderInstance.result;                
+      console.log(base64data);
+      this.setState({image: base64data})
+    }
+    }
+    
+
+  }
+
+  async getPhoto(){
+    try{
+        const {id_patient, r_number, password} = this.props.route.params;
+        const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/photo_patient/${id_patient}`, {
+        method: 'GET',
+        headers: new Headers({ 
+            'Authorization': 'Basic '+btoa(`${r_number}:${password}`),          
+        }),
+        }).then(response => {return Promise.all([response.status, response.blob()])}).then(result => {
+          this.processResponse(result[1], result[0])})
+    }catch (error){
+        alert(error);
+    } 
+}
 
 
   Messages(message){
@@ -75,24 +107,26 @@ class LoginPatientScreen extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <View style={{alignSelf: 'flex-end', marginRight:10, marginTop:10}}>
-          <Text>
-            <Icon name="bell" size={40} color={this.state.btnColor}/>
-
+        <View style={{justifyContent: 'space-between', marginRight:10, marginTop:10, flexDirection:'row'}}>
+          <Image source={{uri: this.state.image}} style={{ borderRadius: 100, marginLeft: 20, marginTop: 20, maxWidth: 120,  maxHeight: 120, minHeight: 120, minWidth: 120, flex: 1 }}/>
+          <Text style={{marginRight: 10, marginTop: 20}}>
+            <Icon name="bell" size={40} color={this.state.btnColor} />
           </Text>
         </View>
-        
-        <TouchableOpacity style={styles.btnHome} onPress= {() => this.props.navigation.navigate('PatientCarbohydratesScreen')}>
-          <Text>Idem jesť</Text>
+        <View style={{top: 100}}>
+          <TouchableOpacity style={styles.btnHome} onPress= {() => this.props.navigation.navigate('PatientCarbohydratesScreen')}>
+            <Text>Idem jesť</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSugarCalcScreen', {cabohydrates: 0, tag: 0})}>
             <Text>Vypočítaj inzulín</Text> 
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen', {id_patient: this.props.route.params.id_patient, 
-          r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
+            r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
             <Text>Zapíš hodnotu cukru</Text>
           </TouchableOpacity> 
+        </View>
+        
       </View>
     );
   }

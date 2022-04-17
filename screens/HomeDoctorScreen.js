@@ -25,6 +25,7 @@ class HomeDoctorScreen extends React.Component{
     Messages(message){
         Alert.alert("nieco",message)
     }
+    
 
     addPatient(id_doctor, r_doctor, p_doctor){
         this.props.navigation.navigate('AddPatient',{id: id_doctor, r_number: r_doctor, password: p_doctor})
