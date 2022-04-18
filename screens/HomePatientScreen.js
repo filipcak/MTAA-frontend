@@ -5,7 +5,9 @@ import moment from 'moment';
 import { useIsFocused } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {decode as atob, encode as btoa} from 'base-64'
-import blankImage from '../images/emptyProfile.png'
+import blankImage from '../images/emptyProfile.png';
+import { launchImageLibrary } from 'react-native-image-picker';
+
 
 import {
   StyleSheet,
@@ -31,9 +33,39 @@ class LoginPatientScreen extends React.Component{
       id_patient: "",
       id_number: "",
       password: "",    
-      image: Image.resolveAssetSource(blankImage).uri
+      image: Image.resolveAssetSource(blankImage).uri,
+      photo: null,
+      setPhoto: null
     }
   }
+
+  createFormData (photo, body = {}) {
+    const data = new FormData();
+
+    console.log(photo);
+    data.append('image', {
+      name: photo.fileName,
+      type: photo.type,
+      uri: photo.uri,
+    });
+
+    Object.keys(body).forEach((key) => {
+      data.append(key, body[key]);
+    });
+
+    return data;
+  };
+
+
+  handleChoosePhoto (setPhoto){
+    launchImageLibrary({ noData: true }, (response) => {
+      if (response) {
+        //console.log(response);
+        setPhoto = response;
+        this.putPhoto(response);
+      }
+    });
+  };
 
   date = moment(new Date()).format("YYYY-MM-DDTHH:mm:ss");
 
@@ -50,7 +82,7 @@ class LoginPatientScreen extends React.Component{
       fileReaderInstance.readAsDataURL(imageBlob); 
       fileReaderInstance.onload = () => {
       let base64data = fileReaderInstance.result;                
-      console.log(base64data);
+      //console.log(base64data);
       this.setState({image: base64data})
     }
     }
@@ -70,6 +102,24 @@ class LoginPatientScreen extends React.Component{
         alert(error);
     } 
 }
+
+  async putPhoto(image){
+    try{
+      const {id_patient, r_number, password} = this.props.route.params;
+      const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/photo_update/`, {
+        body: this.createFormData(image.assets[0], { patient_id: `${id_patient}` }),
+        method: 'PUT',
+        headers: new Headers({
+
+          'Authorization': 'Basic '+btoa(`${r_number}:${password}`),
+          'Content-Type': 'multipart/form-data',
+        }),
+      }).then(response => console.log(response.status))
+    }catch (error){
+      console.log(error);
+      alert(error);
+    }
+  }
 
   Messages(message){
     if (message === 200){
@@ -129,7 +179,10 @@ class LoginPatientScreen extends React.Component{
               <Text></Text>
               <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
                 <Text>Zavolaj doktorovi</Text>
-              </TouchableOpacity> 
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnHome} onPress= {() => this.handleChoosePhoto(this.state.setPhoto)}>
+                <Text>upload foto</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
