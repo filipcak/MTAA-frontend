@@ -69,11 +69,13 @@ class LoginDoctorScreen extends React.Component{
           onChangeText={(password) =>   this.passwrd = password}
         />
    
-        <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-            this.myFunction();
-        }}>
-          <Text>Prihlás sa</Text>
-        </TouchableOpacity>
+        <View style={{marginTop: 20}}>
+          <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+              this.myFunction();
+          }}>
+            <Text>Prihlás sa</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

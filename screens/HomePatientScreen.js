@@ -16,6 +16,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  ImageBackground ,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -53,8 +54,6 @@ class LoginPatientScreen extends React.Component{
       this.setState({image: base64data})
     }
     }
-    
-
   }
 
   async getPhoto(){
@@ -71,7 +70,6 @@ class LoginPatientScreen extends React.Component{
         alert(error);
     } 
 }
-
 
   Messages(message){
     if (message === 200){
@@ -107,35 +105,34 @@ class LoginPatientScreen extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'space-between', marginRight:10, marginTop:10, flexDirection:'row'}}>
-          <Image source={{uri: this.state.image}} style={{ borderRadius: 100, marginLeft: 20, marginTop: 20, maxWidth: 120,  maxHeight: 120, minHeight: 120, minWidth: 120, flex: 1 }}/>
-          <Text style={{marginRight: 10, marginTop: 20}}>
-            <Icon name="bell" size={40} color={this.state.btnColor} />
-          </Text>
-        </View>
-        <View style={{top: 100}}>
-          <TouchableOpacity style={styles.btnHome} onPress= {() => this.props.navigation.navigate('PatientCarbohydratesScreen')}>
-            <Text>Idem jesť</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSugarCalcScreen', {cabohydrates: 0, tag: 0})}>
-            <Text>Vypočítaj inzulín</Text> 
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen', {id_patient: this.props.route.params.id_patient, 
-            r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
-            <Text>Zapíš hodnotu cukru</Text>
-          </TouchableOpacity> 
-
-          <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
-            <Text></Text>
-            <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
-              <Text>Zavolaj doktorovi</Text>
-            </TouchableOpacity> 
+        <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+          <View style={{justifyContent: 'space-between', marginRight:10, marginTop:10, flexDirection:'row'}}>
+            <Image source={{uri: this.state.image}} style={{ borderRadius: 100, marginLeft: 20, marginTop: 20, maxWidth: 120,  maxHeight: 120, minHeight: 120, minWidth: 120, flex: 1 }}/>
+            <Text style={{marginRight: 10, marginTop: 20}}>
+              <Icon name="bell" size={40} color={this.state.btnColor} />
+            </Text>
           </View>
-          
+          <View style={{top: 100}}>
+            <TouchableOpacity style={styles.btnHome} onPress= {() => this.props.navigation.navigate('PatientCarbohydratesScreen')}>
+              <Text>Idem jesť</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSugarCalcScreen', {cabohydrates: 0, tag: 0})}>
+              <Text>Vypočítaj inzulín</Text> 
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen', {id_patient: this.props.route.params.id_patient, 
+              r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
+              <Text>Zapíš hodnotu cukru</Text>
+            </TouchableOpacity> 
 
-          
-        </View>
+            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
+              <Text></Text>
+              <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
+                <Text>Zavolaj doktorovi</Text>
+              </TouchableOpacity> 
+            </View>
+          </View>
+        </ImageBackground>
         
       </View>
     );

@@ -10,6 +10,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  ImageBackground ,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -65,24 +66,25 @@ class PatientSugarCalcScreen extends React.Component{
     render(){
         return (
             <View style={styles.container}>
-                <Text style={styles.textStyleInfo}>
-                    Zadaj tvoju nameranú hladinu cukru v krvi v mg/dL.
-                </Text>
+                <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+                    <Text style={styles.textStyleInfo}>
+                        Zadaj tvoju nameranú hladinu cukru v krvi v mg/dL.
+                    </Text>
 
-                <Text style={styles.textStyleSugar}>
-                    ZADAJ HLADINU CUKRU V KRVI(mg/dL)
-                </Text>
+                    <Text style={styles.textStyleSugar}>
+                        ZADAJ HLADINU CUKRU V KRVI(mg/dL)
+                    </Text>
 
-                <TextInput style={styles.btnStyle} onChangeText={(text) => {
-                    this.sugar = text;
-                }}/>
+                    <TextInput style={styles.btnStyle} onChangeText={(text) => {
+                        this.sugar = text;
+                    }}/>
 
-                <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-                    this.checkValue();
-                }}>
-                    <Text>Potvrď</Text>
-                </TouchableOpacity>
-                
+                    <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+                        this.checkValue();
+                    }}>
+                        <Text>Vypočítaj</Text>
+                    </TouchableOpacity>
+                </ImageBackground>
             </View>
         );
     }

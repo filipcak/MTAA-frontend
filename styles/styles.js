@@ -16,6 +16,9 @@ export const styles = StyleSheet.create({
         fontFamily: "Roboto",
         color: "#121212",
         marginTop: 20,
+        marginBottom: 20,
+        marginLeft: 20,
+        marginRight: 20,
       },
     textStyleTitle: {      
       alignSelf: "center",
@@ -29,8 +32,8 @@ export const styles = StyleSheet.create({
       alignSelf: "center",
       fontFamily: "Roboto",
       color: "#121212",
-      fontSize: 25,
-      marginTop: 10
+      fontSize: 24,
+      width: "80%",
     },
     
     inputView: {
@@ -67,6 +70,28 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: "#FFF",
     },
+    sugarResultText: {
+      alignSelf: 'center',
+      width: "80%",
+      borderRadius: 10,
+      height: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 10,
+      backgroundColor: "#FFF",
+      fontSize: 30,
+  },
+    btnStyleReg: {
+      alignSelf: 'center',
+      width: "80%",
+      borderRadius: 10,
+      height: 35,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 5,
+      backgroundColor: "#FFF",
+      
+  },
     btnCall: {
       alignSelf: 'center',
         width: "40%",
@@ -86,6 +111,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 30,
         backgroundColor: "#00BFFF",
+        
     },
     btnStyleRegLog: {
         alignSelf: 'center',
@@ -96,6 +122,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 30,
         backgroundColor: "#00BFFF",
+        marginBottom: 60
     },
     dataView: {
       top: "20%",

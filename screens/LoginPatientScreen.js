@@ -10,6 +10,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  ImageBackground ,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -46,25 +47,29 @@ class LoginPatientScreen extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.textStyle}>Rodné číslo</Text>
-        <TextInput
-          style={styles.btnStyle}
-          placeholder="XXXXXX/XXXX"
-          onChangeText={(text) => {this.setState({id_number: text})}}
-        />
-  
-        <Text style={styles.textStyle}>Heslo</Text>
-        <TextInput
-          style={styles.btnStyle}
-          secureTextEntry={true}
-          onChangeText={(text) => {this.setState({password: text})}}
-        />
-   
-        <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
-    this.signInPatient();
-  }}>
-          <Text>Prihlas sa</Text>
-        </TouchableOpacity>
+        <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+          <Text style={styles.textStyle}>Rodné číslo</Text>
+          <TextInput
+            style={styles.btnStyle}
+            placeholder="XXXXXX/XXXX"
+            onChangeText={(text) => {this.setState({id_number: text})}}
+          />
+    
+          <Text style={styles.textStyle}>Heslo</Text>
+          <TextInput
+            style={styles.btnStyle}
+            secureTextEntry={true}
+            onChangeText={(text) => {this.setState({password: text})}}
+          />
+    
+          <View style={{marginTop: 20}}>
+            <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+        this.signInPatient();
+      }}>
+              <Text>Prihlás sa</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     );
   }
