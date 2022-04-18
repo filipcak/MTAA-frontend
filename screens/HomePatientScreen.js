@@ -29,7 +29,6 @@ class LoginPatientScreen extends React.Component{
     this.checkIfDataActual();
     this.state={
       btnColor:"#000",
-
       id_patient: "",
       id_number: "",
       password: "",    
@@ -42,17 +41,15 @@ class LoginPatientScreen extends React.Component{
   createFormData (photo, body = {}) {
     const data = new FormData();
 
-    console.log(photo);
     data.append('image', {
       name: photo.fileName,
       type: photo.type,
-      uri: photo.uri,
+      uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
     });
 
     Object.keys(body).forEach((key) => {
       data.append(key, body[key]);
     });
-
     return data;
   };
 
@@ -60,8 +57,6 @@ class LoginPatientScreen extends React.Component{
   handleChoosePhoto (setPhoto){
     launchImageLibrary({ noData: true }, (response) => {
       if (response) {
-        //console.log(response);
-        setPhoto = response;
         this.putPhoto(response);
       }
     });
@@ -106,18 +101,23 @@ class LoginPatientScreen extends React.Component{
   async putPhoto(image){
     try{
       const {id_patient, r_number, password} = this.props.route.params;
-      const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/photo_update/`, {
+      const response = await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/photo_update`, {
         body: this.createFormData(image.assets[0], { patient_id: `${id_patient}` }),
         method: 'PUT',
         headers: new Headers({
-
           'Authorization': 'Basic '+btoa(`${r_number}:${password}`),
           'Content-Type': 'multipart/form-data',
         }),
-      }).then(response => console.log(response.status))
+      }).then(response => {
+        if (response.status == 200){
+          Alert.alert('Úspech', 'Úspešne nahratá fotka');
+        }
+        else {
+          Alert.alert('Neúspech', 'neúspešne nahratá fotka, skúste ešte raz');
+        }
+      })
     }catch (error){
-      console.log(error);
-      alert(error);
+      Alert.alert('Neúspech', 'chyba v aplikácii')
     }
   }
 
@@ -162,26 +162,27 @@ class LoginPatientScreen extends React.Component{
               <Icon name="bell" size={40} color={this.state.btnColor} />
             </Text>
           </View>
-          <View style={{top: 100}}>
+          <View style={{justifyContent: 'space-between', flexDirection: 'row', marginLeft: 20, top: 15}}>
+          <TouchableOpacity style={styles.btnUpload} onPress= {() => this.handleChoosePhoto(this.state.setPhoto)}>
+            <Text>Nahraj fotku</Text>
+          </TouchableOpacity>
+          </View>
+
+          <View style={{top: 20}}>
             <TouchableOpacity style={styles.btnHome} onPress= {() => this.props.navigation.navigate('PatientCarbohydratesScreen')}>
               <Text>Idem jesť</Text>
             </TouchableOpacity>
-            
             <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSugarCalcScreen', {cabohydrates: 0, tag: 0})}>
               <Text>Vypočítaj inzulín</Text> 
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnHome} onPress={() => this.props.navigation.navigate('PatientSendSugarScreen', {id_patient: this.props.route.params.id_patient, 
               r_number: this.props.route.params.r_number, password: this.props.route.params.password})}>
               <Text>Zapíš hodnotu cukru</Text>
-            </TouchableOpacity> 
-
+            </TouchableOpacity>
             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
               <Text></Text>
               <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
                 <Text>Zavolaj doktorovi</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btnHome} onPress= {() => this.handleChoosePhoto(this.state.setPhoto)}>
-                <Text>upload foto</Text>
               </TouchableOpacity>
             </View>
           </View>

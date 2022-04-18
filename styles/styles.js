@@ -155,5 +155,14 @@ export const styles = StyleSheet.create({
         color: "#121212",
         marginTop: 10,
         paddingRight: 10
-    }
+    },
+    btnUpload: {
+        alignSelf: 'center',
+        width: 120,
+        borderRadius: 15,
+        height: 30,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#00BFFF",
+    },
 });
