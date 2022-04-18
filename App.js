@@ -67,7 +67,7 @@ export default class App extends React.Component {
           <Stack.Screen
             name="PatientCarbohydratesScreen"
             component={PatientCarbohydratesScreen}
-            options={{ title: 'Zadanie karborydrátov'}}
+            options={{ title: 'Zadanie karbohydrátov'}}
           />
           <Stack.Screen
             name="PatientSendSugarScreen"
@@ -92,7 +92,7 @@ export default class App extends React.Component {
           <Stack.Screen
               name="DataPatient"
               component={DataPatient}
-              options={{ title: 'Pacientové dáta'}}
+              options={{ title: 'Pacientové záznamy'}}
           />
           <Stack.Screen
               name="RoomScreen"

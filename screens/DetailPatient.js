@@ -9,6 +9,8 @@ import {
     Image,
     TouchableOpacity,
     Alert,
+    ScrollView,
+    ImageBackground,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -71,10 +73,6 @@ class DetailPatient extends React.Component{
         this.props.navigation.navigate('HomeDoctorScreen', {id: id_doctor, r_number: r_doctor, password: p_doctor})
     }
 
-    indevelopment(){
-        Alert.alert("in development", "pracuje sa na tom");
-    }
-
     async removePatient(id_doctor, r_doctor, p_doctor, id_p){
         try{
             await fetch(`https://mtaa-backend-pscpu.ondigitalocean.app/remove?patient_id=${id_p}&doctor_id=${id_doctor}`, {
@@ -103,20 +101,19 @@ class DetailPatient extends React.Component{
         const {id, r_number, password, id_p} = this.props.route.params;
         this.detailPatient(id, r_number, password, id_p);
         return (
-            <View style={styles.dataView} >
-                <Text key={this.state.uniqueValue}>Meno:{'\n\t\t\t'}{this.patient.patient_name}</Text>
-                <Text key="surname">Priezvisko:{'\n\t\t\t'}{this.patient.patient_surname}</Text>
-                <Text key="id_number">Rodné číslo:{'\n\t\t\t'}{this.patient.patient_rc}</Text>
-                <Text key="mail">Mail:{'\n\t\t\t'}{this.patient.patient_mail}</Text>
+            <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+            <ScrollView style={styles.dataView} >
+                <Text style={styles.textStyles} key={this.state.uniqueValue}>Meno:{'\n\t\t\t'}{this.patient.patient_name}</Text>
+                <Text style={styles.textStyles} key="surname">Priezvisko:{'\n\t\t\t'}{this.patient.patient_surname}</Text>
+                <Text style={styles.textStyles} key="id_number">Rodné číslo:{'\n\t\t\t'}{this.patient.patient_rc}</Text>
+                <Text style={styles.textStyles}key="mail">Mail:{'\n\t\t\t'}{this.patient.patient_mail}</Text>
                 <TouchableOpacity style={styles.btnStyleleft} onPress = {() => {
                     this.dataPatient(id, r_number, password, id_p);
                 }}>
                     <Text>Záznamy o pacientovi</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnStyleleft} onPress = {() => {
-                    this.indevelopment();
-                }}>
+                <TouchableOpacity style={styles.btnStyleleft} onPress={() => this.props.navigation.navigate('RoomScreen')}>
                     <Text>Zavolaj pacientovi</Text>
                 </TouchableOpacity>
 
@@ -125,7 +122,8 @@ class DetailPatient extends React.Component{
                 }}>
                     <Text>Odstráň pacienta</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
+            </ImageBackground>
         );
     }
 }

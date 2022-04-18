@@ -125,15 +125,12 @@ export const styles = StyleSheet.create({
         marginBottom: 60
     },
     dataView: {
-      top: "20%",
+      top: "10%",
       left: "10%",
       right: "10%",
-      //textAlign: 'center',
-      padding: 24,
       position: 'absolute',
       fontFamily: "Roboto",
       color: "#121212",
-      backgroundColor: "#a1f0fe",
       borderRadius: 12,
     },
     // working
@@ -154,7 +151,8 @@ export const styles = StyleSheet.create({
         fontFamily: "Roboto",
         color: "#121212",
         marginTop: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        fontSize: 18
     },
     btnUpload: {
         alignSelf: 'center',
@@ -164,5 +162,11 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#00BFFF",
+    },
+    textStyleData: {
+        alignSelf: "center",
+        fontFamily: "Roboto",
+        color: "#121212",
+        fontSize: 35,
     },
 });

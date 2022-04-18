@@ -7,7 +7,9 @@ import {
     View,
     TouchableOpacity,
     Alert,
-    FlatList
+    FlatList,
+    ImageBackground,
+    ScrollView,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -23,7 +25,7 @@ class HomeDoctorScreen extends React.Component{
     patients = [{"id_number": "1234/23"}]
 
     Messages(message){
-        Alert.alert("nieco",message)
+        Alert.alert("Alert",message)
     }
     
 
@@ -60,7 +62,7 @@ class HomeDoctorScreen extends React.Component{
                     <TouchableOpacity onPress = {() => {
                         this.detailPatient(d_id, d_rn, d_p, id_patient);
                     }}>
-                        <Text key={id_patient}>{id_number} </Text>
+                        <Text key={id_patient} style={styles.textStyles}>{id_number} </Text>
                     </TouchableOpacity>
                 </View>
             )
@@ -71,26 +73,20 @@ class HomeDoctorScreen extends React.Component{
         const {id, r_number, password} = this.props.route.params;
         this.getPatients(id, r_number, password);
         return (
-            <View style={styles.dataView}>
-                <Text style={styles.textStyles}>Zoznam tvojich pacientov</Text>
+            <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+            <ScrollView  style={styles.dataView}>
+                <Text style={styles.textStyles}>Zoznam tvojich pacientov:</Text>
                 <Text style={styles.textStyles}>Rodné číslo</Text>
                 <View style={styles.textStyles}>
                     {this.renderTable(this.state.data, id, r_number, password)}
                 </View>
-
-                <TouchableOpacity style={styles.btnStyleRegLog} onPress = {() => {
+                <TouchableOpacity style={styles.btnStyleRegLog}  onPress = {() => {
                     this.addPatient(id, r_number, password);
                 }}>
                     <Text>Pridaj pacienta</Text>
                 </TouchableOpacity>
-
-                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 40}}>
-                    <Text></Text>
-                    <TouchableOpacity style={styles.btnCall} onPress={() => this.props.navigation.navigate('RoomScreen')}>
-                        <Text>Spoj sa s pacientom</Text>
-                    </TouchableOpacity> 
-                </View>
-            </View>
+            </ScrollView >
+            </ImageBackground>
         );
     }
 }

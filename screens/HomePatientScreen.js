@@ -111,6 +111,7 @@ class LoginPatientScreen extends React.Component{
       }).then(response => {
         if (response.status == 200){
           Alert.alert('Úspech', 'Úspešne nahratá fotka');
+          this.getPhoto();
         }
         else {
           Alert.alert('Neúspech', 'neúspešne nahratá fotka, skúste ešte raz');

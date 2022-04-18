@@ -10,6 +10,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  ImageBackground,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -55,7 +56,9 @@ class LoginDoctorScreen extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.textStyle}>Rodné číslo</Text>
+          <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+
+          <Text style={styles.textStyle}>Rodné číslo</Text>
         <TextInput
           style={styles.btnStyle}
           placeholder="XXXXXX/XXXX"
@@ -76,6 +79,7 @@ class LoginDoctorScreen extends React.Component{
             <Text>Prihlás sa</Text>
           </TouchableOpacity>
         </View>
+              </ImageBackground>
       </View>
     );
   }

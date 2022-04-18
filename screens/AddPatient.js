@@ -7,6 +7,7 @@ import {
     TextInput,
     TouchableOpacity,
     Alert,
+    ImageBackground,
 } from "react-native";
 
 import { styles } from '../styles/styles'
@@ -73,6 +74,8 @@ class AddPatient extends React.Component{
     render(){
         const {id, r_number, password} = this.props.route.params;
         return (
+            <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+
             <View style={styles.dataView}>
                 <Text style={styles.textStyle}>Napíš rodné číslo pacienta</Text>
                 <TextInput
@@ -86,6 +89,7 @@ class AddPatient extends React.Component{
                     <Text>Pridaj pacienta</Text>
                 </TouchableOpacity>
             </View>
+            </ImageBackground>
         );
     }
 }

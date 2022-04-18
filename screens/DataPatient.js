@@ -12,6 +12,7 @@ import {
     Image,
     TouchableOpacity,
     Alert,
+    ImageBackground,
 } from "react-native";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
@@ -71,8 +72,10 @@ class DataPatient extends React.Component{
             tableData.push(rowData);
         }
         return (
-                <View style={{ flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' }}>
-                    <Text style={styles.textStyleTitle} >{'\n'}Pacientove záznamy{'\n'}</Text>
+            <ImageBackground source={require('../images/background.png')} style={{width: '100%', height: '100%', opacity: 1}}>
+
+            <View style={{ flex: 1, padding: 15, paddingTop: 0}}>
+                    <Text style={styles.textStyleData} >{'\n'}Pacientové záznamy{'\n'}</Text>
                     <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
                         <Row data={state.tableHead} widthArr={state.widthArr} style={{ height: 50, backgroundColor: '#00BFFF' , textAlign: 'center'}} 
                         textStyle={{ textAlign: 'center', fontWeight: '100' }}/>
@@ -93,8 +96,7 @@ class DataPatient extends React.Component{
                         </Table>
                     </ScrollView>
                 </View>
-            
-            
+            </ImageBackground>
         );
     }
 }
