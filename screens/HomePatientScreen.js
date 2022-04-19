@@ -57,7 +57,14 @@ class LoginPatientScreen extends React.Component{
   handleChoosePhoto (setPhoto){
     launchImageLibrary({ noData: true }, (response) => {
       if (response) {
-        this.putPhoto(response);
+          if (response.assets[0].fileSize > 6000000) {
+              Alert.alert('Chyba', 'Fotka je moc velká.');
+          } else if(response.assets[0].type != "image/png" && response.assets[0].type != "image/jpg" && response.assets[0].type != "image/jpeg"){
+              Alert.alert('Chyba', 'Súbor nie je fotka.');
+          }
+          else {
+              this.putPhoto(response);
+          }
       }
     });
   };
